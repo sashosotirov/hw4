@@ -4,34 +4,35 @@ const github = require('@actions/github');
 
 async function run() {
     try {
-        // const owner = core.getInput('owner');
-        // const repository = core.getInput('repository');
-        // This should be a token with access to repository scoped in as a secret.
-        // The YML workflow will need to set myToken with the GitHub Secret Token
+        const remoteOwner = core.getInput('remote-owner');
+        const remoteRepo = core.getInput('remote-repo');
+        const remoteFile = core.getInput('remote-file');
+        const currentFile = core.getInput('current-file');          
         const myToken = core.getInput('myToken');
         const octokit = github.getOctokit(myToken);
-        const context = github.context;
-                
+        const context = github.context;                
         
         console.log('Readme file content', core.getInput('remote-repo')) // for debug purpose
 
         const { data: {content}} = await octokit.request('GET /repos/{owner}/{repo}/readme{?ref}', {
-            owner: core.getInput('remote-owner') , 
-            repo: core.getInput('remote-repo')
+            owner: remoteOwner , 
+            repo: remoteRepo
         })
         console.log('Readme file content', content)
 
         const { data: {sha}} = await octokit.request('GET /repos/{owner}/{repo}/contents/{file_path}', {
              ... context.repo , 
-            file_path: core.getInput('current-file')
+            file_path: currentFile
         })
+        
+        console.log('Readme file content', content)
         console.log('sha content', sha)
 
        
         await octokit.request('PUT /repos/{owner}/{repo}/contents/{file_path}', {
             ... context.repo,
-            file_path: core.getInput('current-file'),
-            message: 'a new commit message',
+            file_path: currentFile,
+            message: 'automatic file update',
             committer: {
             name: 'Monalisa Octocat',
             email: 'octocat@github.com'
@@ -39,10 +40,6 @@ async function run() {
             content: content,
             sha: sha
         })
-
-
-
-
       
         // const payload = github.context.payload;
         // console.log(`The event payload: `, JSON.stringify(payload,undefined, 2));
