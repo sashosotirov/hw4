@@ -18,7 +18,7 @@ async function run() {
         const { data: {content}} = await octokit.request('GET /repos/{owner}/{repo}/readme{?ref}', {
             ...context.repo
         })
-        console.log('Readme file content', data)
+        console.log('Readme file content', content)
 
       
         const payload = github.context.payload;
