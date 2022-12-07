@@ -25,11 +25,12 @@ async function run() {
              ... context.repo , 
             file_path: core.getInput('current-file')
         })
-        console.log('Readme sha content', sha)
+        console.log('sha content', sha)
 
        
-        await octokit.request('PUT /repos/{owner}/{repo}/contents/{path}', {
+        await octokit.request('PUT /repos/{owner}/{repo}/contents/{file_path}', {
             ... context.repo,
+            file_path: core.getInput('current-file'),
             message: 'a new commit message',
             committer: {
             name: 'Monalisa Octocat',
