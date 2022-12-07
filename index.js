@@ -14,7 +14,7 @@ async function run() {
         
         console.log(remoteFile,remoteOwner,remoteRepo,currentFile) // for debug purpose
 
-        await octokit.request('GET /repos/{owner}/{repo}/contents/{file_path}{?ref}', {
+        const { data: {content}} = await octokit.request('GET /repos/{owner}/{repo}/contents/{file_path}{?ref}', {
             owner: remoteOwner,
             repo: remoteRepo,
             file_path: remoteFile
