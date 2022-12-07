@@ -16,9 +16,11 @@ async function run() {
         // console.log(`Hello ${nameToGreet}!`);
 
         const { data: {content}} = await octokit.request('GET /repos/{owner}/{repo}/readme{?ref}', {
-            ...context.repo
+            owner: core.getInput('remote-owner') , 
+            repo: core.getInput('remote-repo')
         })
         console.log('Readme file content', content)
+
 
       
         const payload = github.context.payload;
