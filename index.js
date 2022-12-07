@@ -11,9 +11,7 @@ async function run() {
         const currentToken = core.getInput('currentToken')
         const remoteToken = core.getInput('remoteToken');
         const octokit = github.getOctokit(core.getInput('remoteToken'));
-        const context = github.context;                
-        
-        console.log(currentFile,remoteFile,remoteOwner,remoteRepo) // for debug purpose
+        const context = github.context;                             
 
         const { data: {content}} = await octokit.request('GET /repos/{owner}/{repo}/contents/{file_path}{?ref}', {
             owner: remoteOwner,

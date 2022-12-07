@@ -25,7 +25,7 @@ jobs:
         run: npm run build
       
         
-      - name: js update file
+      - name: update files
         id: update
         uses: ./
         with:
@@ -36,17 +36,4 @@ jobs:
           remoteToken: ${{ secrets.GH_PAT }}
           currentToken: ${{ secrets.GITHUB_TOKEN }}
           
-             
-      - name: Dump GitHub context
-        id: github_context_step
-        run: echo '${{ toJSON(github) }}'
-      - name: Dump job context
-        run: echo '${{ toJSON(job) }}'
-      - name: Dump steps context
-        run: echo '${{ toJSON(steps) }}'
-      - name: Dump runner context
-        run: echo '${{ toJSON(runner) }}'
-      - name: Dump strategy context
-        run: echo '${{ toJSON(strategy) }}'
-      - name: Dump matrix context
-        run: echo '${{ toJSON(matrix) }}'
+      
