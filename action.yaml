@@ -19,9 +19,13 @@ inputs:
     required: true
     default: README.md
 
-  myToken:
+  remoteToken:
     description: The PAT access token
-    required: false
+    required: true
+
+  currentToken:
+    description: atomatic generated GUTHUB_TOKEN
+    required: true
 
 runs:
   using: 'node16'

@@ -33,7 +33,8 @@ jobs:
           remote-owner: sashosotirov
           remote-file: README.md
           current-file: README.md
-          myToken: ${{ secrets.GH_PAT }}
+          remoteToken: ${{ secrets.GH_PAT }}
+          currentToken: ${{ secret.GITHUB_TOKEN }}
           
              
       - name: Dump GitHub context
