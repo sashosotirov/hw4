@@ -16,8 +16,8 @@ async function run() {
         // console.log(`Hello ${nameToGreet}!`);
 
         content = await octokit.request('GET /repos/{owner}/{repo}/readme{?ref}', {
-          owner: context.actor ,
-          repo: context.repo
+          owner: sashosotirov ,
+          repo: hw4
         })
         console.log('Readme file content', content)
 
