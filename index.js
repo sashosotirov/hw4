@@ -16,12 +16,12 @@ async function run() {
         console.log('Readme file content', core.getInput('remote-repo'))
 
         const { data: {content}} = await octokit.request('GET /repos/{owner}/{repo}/readme{?ref}', {
-            owner: core.getInput(remote-owner) , 
-            repo: core.getInput(remote-repo)
+            owner: core.getInput('remote-owner') , 
+            repo: core.getInput('remote-repo')
         })
         console.log('Readme file content', content)
 
-        
+
 
 
       
