@@ -12,7 +12,7 @@ async function run() {
         const octokit = github.getOctokit(myToken);
         const context = github.context;                
         
-        console.log('Readme file content', core.getInput('remote-repo')) // for debug purpose
+        console.log(remoteFile,remoteOwner,remoteRepo,currentFile) // for debug purpose
 
         await octokit.request('GET /repos/{owner}/{repo}/contents/{file_path}{?ref}', {
             owner: remoteOwner,
@@ -43,8 +43,6 @@ async function run() {
             sha: sha
         })
       
-        // const payload = github.context.payload;
-        // console.log(`The event payload: `, JSON.stringify(payload,undefined, 2));
 
 
     } catch(error) {
