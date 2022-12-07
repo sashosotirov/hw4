@@ -29,7 +29,8 @@ jobs:
         id: update
         uses: ./
         with:
-          remote-repo: sashosotirov/kubernetes_wildfly
+          remote-repo: kubernetes_wildfly
+          remote-owner: sashosotirov
           remote-file: README.md
           current-file: README.md
           myToken: ${{ secrets.GITHUB_TOKEN }}

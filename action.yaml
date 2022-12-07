@@ -1,13 +1,14 @@
-name: Hello-Java-Script-Action
-description: 'random description'
+name: myCustomAction
+description: 'update file content'
 
 inputs:
 
+  remote-owner:
+    description: remote owner
+    
   remote-repo:
     description: remote repository
-    required: true
-    default: sashosotirov/kubernetes_wildfly
-
+    
   remote-file:
     description: remote file to copy content
     required: true
@@ -21,19 +22,6 @@ inputs:
   myToken:
     description: The PAT access token
     required: false
-
-  # repository:
-  #   description: blabla
-  #   required: true
-  # owner: 
-  #   required: true
-  pull_request_number:
-    description: github context for PRN
-    required: true
-
-outputs:
-  time:
-    description: The time we greeted you
 
 runs:
   using: 'node16'
