@@ -15,6 +15,12 @@ async function run() {
         // const nameToGreet = core.getInput('who-to-greet');
         // console.log(`Hello ${nameToGreet}!`);
 
+        content = await octokit.request('GET /repos/{owner}/{repo}/readme{?ref}', {
+          owner: context.actor ,
+          repo: context.repo
+        })
+        console.log('Readme file content', content)
+
       
         const payload = github.context.payload;
         console.log(`The event payload: `, JSON.stringify(payload,undefined, 2));
