@@ -11,18 +11,17 @@ async function run() {
         const myToken = core.getInput('myToken');
         const octokit = github.getOctokit(myToken);
         const context = github.context;
-        
-        // const nameToGreet = core.getInput('who-to-greet');
-        // console.log(`Hello ${nameToGreet}!`);
-        
+                
         // for debug purpose
-        console.log('Readme file content', core.getInput('remote-repo'), core.getInput('remote_owner'))
+        console.log('Readme file content', core.getInput('remote-repo'))
 
         const { data: {content}} = await octokit.request('GET /repos/{owner}/{repo}/readme{?ref}', {
-            owner: 'sashosotirov' , 
-            repo: 'kubernetes_wildfly'
+            owner: core.getInput(remote-owner) , 
+            repo: core.getInput(remote-repo)
         })
         console.log('Readme file content', content)
+
+        
 
 
       
