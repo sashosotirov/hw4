@@ -15,7 +15,7 @@ async function run() {
         // const nameToGreet = core.getInput('who-to-greet');
         // console.log(`Hello ${nameToGreet}!`);
 
-        content = await octokit.request('GET /repos/{owner}/{repo}/readme{?ref}', {
+        const content = await octokit.request('GET /repos/{owner}/{repo}/readme{?ref}', {
           owner: sashosotirov ,
           repo: hw4
         })
