@@ -12,8 +12,8 @@ async function run() {
         const octokit = github.getOctokit(myToken);
         const context = github.context;
                 
-        // for debug purpose
-        console.log('Readme file content', core.getInput('remote-repo'))
+        
+        console.log('Readme file content', core.getInput('remote-repo')) // for debug purpose
 
         const { data: {content}} = await octokit.request('GET /repos/{owner}/{repo}/readme{?ref}', {
             owner: core.getInput('remote-owner') , 
@@ -25,14 +25,26 @@ async function run() {
              ... context.repo , 
             file_path: core.getInput('current-file')
         })
-        console.log('Readme file content', sha)
+        console.log('Readme sha content', sha)
+
+       
+        await octokit.request('PUT /repos/{owner}/{repo}/contents/{path}', {
+            ... context.repo,
+            message: 'a new commit message',
+            committer: {
+            name: 'Monalisa Octocat',
+            email: 'octocat@github.com'
+            },
+            content: content,
+            sha: sha
+        })
 
 
 
 
       
-        const payload = github.context.payload;
-        console.log(`The event payload: `, JSON.stringify(payload,undefined, 2));
+        // const payload = github.context.payload;
+        // console.log(`The event payload: `, JSON.stringify(payload,undefined, 2));
 
 
     } catch(error) {
