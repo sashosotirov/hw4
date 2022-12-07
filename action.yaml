@@ -3,15 +3,20 @@ description: 'random description'
 
 inputs:
 
-  who-to-greet:
-    description: anyone to greet
+  remote-repo:
+    description: remote repository
     required: true
-    default: "DevOps Academy"
+    default: sashosotirov/kubernetes_wildfly
 
-  test-input:
-    description: just for test
+  remote-file:
+    description: remote file to copy content
     required: true
-    default: " test input value "
+    default: README.md
+
+  current-file:
+    description: current file to update content
+    required: true
+    default: README.md
 
   myToken:
     description: The PAT access token

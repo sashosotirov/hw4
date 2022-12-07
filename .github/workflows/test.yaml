@@ -1,15 +1,12 @@
 
 # triger workflow event
 on: 
-  pull_request:
-    types: [ opened, reopened, synchronize ]
-    branches: 
-      - main
-
+  push:
+    
 jobs:
-  hello-world-job:
+  update-files:
     runs-on: ubuntu-20.04  #runner
-    name: A job say hello world
+    name: Update file content
     steps:
         #This action checks-out your repository under $GITHUB_WORKSPACE, so your workflow can access it.
       - name: Checkout
@@ -27,29 +24,17 @@ jobs:
       - name: Building action
         run: npm run build
       
-        #homework 3_2
-      - name: Tar files
-        run: tar -cvf js-hello-world-action.tar ./dist
-
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: js-hello-world-artifact
-          path: js-hello-world-action.tar
-
-      
-      - name: hello-world action step 1
-        id: hello
+        
+      - name: js update file
+        id: update
         uses: ./
         with:
-          pull_request_number: ${{ github.event.number }}
+          remote-repo: sashosotirov/kubernetes_wildfly
+          remote-file: README.md
+          current-file: README.md
           myToken: ${{ secrets.GITHUB_TOKEN }}
-          who-to-greet: DevOps Academy
-          test-input: new test input for HW3_1
-        
-      - name: Get output from step 1
-        run: echo "The time was ${{ steps.hello.outputs.time }}"
-
+          
+             
       - name: Dump GitHub context
         id: github_context_step
         run: echo '${{ toJSON(github) }}'
