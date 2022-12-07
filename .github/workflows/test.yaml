@@ -1,0 +1,65 @@
+
+# triger workflow event
+on: 
+  pull_request:
+    types: [ opened, reopened, synchronize ]
+    branches: 
+      - main
+
+jobs:
+  hello-world-job:
+    runs-on: ubuntu-20.04  #runner
+    name: A job say hello world
+    steps:
+        #This action checks-out your repository under $GITHUB_WORKSPACE, so your workflow can access it.
+      - name: Checkout
+        uses: actions/checkout@v3 
+
+        #Downloading and caching distribution of the requested Node.js version, and adding it to the PATH
+      - name: Set Node.js 16.x
+        uses: actions/setup-node@v3.5.1
+        with:
+          node-version: 16.x
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Building action
+        run: npm run build
+      
+        #homework 3_2
+      - name: Tar files
+        run: tar -cvf js-hello-world-action.tar ./dist
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: js-hello-world-artifact
+          path: js-hello-world-action.tar
+
+      
+      - name: hello-world action step 1
+        id: hello
+        uses: ./
+        with:
+          pull_request_number: ${{ github.event.number }}
+          myToken: ${{ secrets.GITHUB_TOKEN }}
+          who-to-greet: DevOps Academy
+          test-input: new test input for HW3_1
+        
+      - name: Get output from step 1
+        run: echo "The time was ${{ steps.hello.outputs.time }}"
+
+      - name: Dump GitHub context
+        id: github_context_step
+        run: echo '${{ toJSON(github) }}'
+      - name: Dump job context
+        run: echo '${{ toJSON(job) }}'
+      - name: Dump steps context
+        run: echo '${{ toJSON(steps) }}'
+      - name: Dump runner context
+        run: echo '${{ toJSON(runner) }}'
+      - name: Dump strategy context
+        run: echo '${{ toJSON(strategy) }}'
+      - name: Dump matrix context
+        run: echo '${{ toJSON(matrix) }}'

@@ -1,0 +1,35 @@
+name: Hello-Java-Script-Action
+description: 'random description'
+
+inputs:
+
+  who-to-greet:
+    description: anyone to greet
+    required: true
+    default: "DevOps Academy"
+
+  test-input:
+    description: just for test
+    required: true
+    default: " test input value "
+
+  myToken:
+    description: The PAT access token
+    required: false
+
+  # repository:
+  #   description: blabla
+  #   required: true
+  # owner: 
+  #   required: true
+  pull_request_number:
+    description: github context for PRN
+    required: true
+
+outputs:
+  time:
+    description: The time we greeted you
+
+runs:
+  using: 'node16'
+  main: 'dist/index.js'
