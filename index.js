@@ -13,21 +13,21 @@ async function run() {
         const octokit = github.getOctokit(core.getInput('remoteToken'));
         const context = github.context;                
         
-        console.log(remoteFile,remoteOwner,remoteRepo,currentFile) // for debug purpose
+        console.log(currentFile,remoteFile,remoteOwner,remoteRepo) // for debug purpose
 
         const { data: {content}} = await octokit.request('GET /repos/{owner}/{repo}/contents/{file_path}{?ref}', {
             owner: remoteOwner,
             repo: remoteRepo,
             file_path: remoteFile
           })
-
-        console.log('Readme file content', content)
-
+        
         const { data: {sha}} = await octokit.request('GET /repos/{owner}/{repo}/contents/{file_path}', {
              ... context.repo , 
             file_path: currentFile
         })
         
+        // for debug purpose
+        console.log(currentFile,remoteFile,remoteOwner,remoteRepo) 
         console.log('Readme file content', content)
         console.log('sha content', sha)
 
@@ -37,7 +37,7 @@ async function run() {
             file_path: currentFile,
             message: 'automatic file update',
             committer: {
-            name: 'Monalisa Octocat',
+            name: context.actor,
             email: 'octocat@github.com'
             },
             content: content,
