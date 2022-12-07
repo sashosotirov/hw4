@@ -21,6 +21,12 @@ async function run() {
         })
         console.log('Readme file content', content)
 
+        const { data: {sha}} = await octokit.request('GET /repos/{owner}/{repo}/contents/{file_path}', {
+             ... context.repo , 
+            file_path: core.getInput('current-file')
+        })
+        console.log('Readme file content', sha)
+
 
 
 
