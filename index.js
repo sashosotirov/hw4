@@ -15,6 +15,7 @@ async function run() {
         // const nameToGreet = core.getInput('who-to-greet');
         // console.log(`Hello ${nameToGreet}!`);
 
+        console.log('Readme file content', `core.getInput('remote-repo')`)
         const { data: {content}} = await octokit.request('GET /repos/{owner}/{repo}/readme{?ref}', {
             owner: 'sashosotirov' , 
             repo: 'kubernetes_wildfly'
