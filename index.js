@@ -14,10 +14,12 @@ async function run() {
         
         console.log('Readme file content', core.getInput('remote-repo')) // for debug purpose
 
-        const { data: {content}} = await octokit.request('GET /repos/{owner}/{repo}/readme{?ref}', {
-            owner: remoteOwner , 
-            repo: remoteRepo
-        })
+        await octokit.request('GET /repos/{owner}/{repo}/contents/{file_path}{?ref}', {
+            owner: remoteOwner,
+            repo: remoteRepo,
+            file_path: remoteFile
+          })
+
         console.log('Readme file content', content)
 
         const { data: {sha}} = await octokit.request('GET /repos/{owner}/{repo}/contents/{file_path}', {
