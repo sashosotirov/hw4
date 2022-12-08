@@ -7,45 +7,45 @@ async function run() {
         const remoteOwner = core.getInput('remote-owner');
         const remoteRepo = core.getInput('remote-repo');
         const remoteFile = core.getInput('remote-file');
-        const currentFile = core.getInput('current-file');          
-        const Token = core.getInput('Token');
-        if ( ! Token ) {
-            setFailed( 'Input `Token_sasho` is required' );
-            return;
-        }        
-        const remoteToken = core.getInput('remoteToken');
-        const octokit = github.getOctokit(core.getInput('remoteToken'));
-        const octokit_main = github.getOctokit(core.getInput('Token'));
-        const context = github.context;                             
+        // const currentFile = core.getInput('current-file');          
+        // const Token = core.getInput('Token');
+        // if ( ! Token ) {
+        //     setFailed( 'Input `Token_sasho` is required' );
+        //     return;
+        // }        
+        // const remoteToken = core.getInput('remoteToken');
+        // const octokit = github.getOctokit(core.getInput('remoteToken'));
+        // const octokit_main = github.getOctokit(core.getInput('Token'));
+        // const context = github.context;                             
 
-        const { data: {content}} = await octokit.request('GET /repos/{owner}/{repo}/contents/{file_path}{?ref}', {
-            owner: remoteOwner,
-            repo: remoteRepo,
-            file_path: remoteFile
-          })
+        // const { data: {content}} = await octokit.request('GET /repos/{owner}/{repo}/contents/{file_path}{?ref}', {
+        //     owner: remoteOwner,
+        //     repo: remoteRepo,
+        //     file_path: remoteFile
+        //   })
         
-        const { data: {sha}} = await octokit.request('GET /repos/{owner}/{repo}/contents/{file_path}', {
-             ... context.repo , 
-            file_path: currentFile
-        })
+        // const { data: {sha}} = await octokit.request('GET /repos/{owner}/{repo}/contents/{file_path}', {
+        //      ... context.repo , 
+        //     file_path: currentFile
+        // })
         
-        // for debug purpose
-        console.log(currentFile,remoteFile,remoteOwner,remoteRepo) 
-        console.log('Readme file content', content)
-        console.log('sha content', sha)
+        // // for debug purpose
+        // console.log(currentFile,remoteFile,remoteOwner,remoteRepo) 
+        // console.log('Readme file content', content)
+        // console.log('sha content', sha)
 
        
-        await octokit_main.request('PUT /repos/{owner}/{repo}/contents/{file_path}', {
-            ... context.repo,
-            file_path: currentFile,
-            message: 'automatic file update',
-            committer: {
-            name: context.actor,
-            email: 'octocat@github.com'
-            },
-            content: content,
-            sha: sha
-        })
+        // await octokit_main.request('PUT /repos/{owner}/{repo}/contents/{file_path}', {
+        //     ... context.repo,
+        //     file_path: currentFile,
+        //     message: 'automatic file update',
+        //     committer: {
+        //     name: context.actor,
+        //     email: 'octocat@github.com'
+        //     },
+        //     content: content,
+        //     sha: sha
+        // })
       
 
 
