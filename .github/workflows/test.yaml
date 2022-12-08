@@ -34,6 +34,6 @@ jobs:
           remote-file: README.md
           current-file: README.md
           remoteToken: ${{ secrets.GH_PAT }}
-          currentToken: blabla
+          currentToken: ${{ secrets.GITHUB_TOKEN }}
           
       
