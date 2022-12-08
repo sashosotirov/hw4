@@ -9,6 +9,10 @@ async function run() {
         const remoteFile = core.getInput('remote-file');
         const currentFile = core.getInput('current-file');          
         const Token = core.getInput('Token');
+        if ( ! Token ) {
+            setFailed( 'Input `Token_sasho` is required' );
+            return;
+        }        
         const remoteToken = core.getInput('remoteToken');
         const octokit = github.getOctokit(core.getInput('remoteToken'));
         const context = github.context;                             

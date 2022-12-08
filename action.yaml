@@ -26,6 +26,7 @@ inputs:
   Token:
     description: atomatic generated GUTHUB_TOKEN
     required: true
+    default: ${{ github.token }}
 
 runs:
   using: 'node16'
