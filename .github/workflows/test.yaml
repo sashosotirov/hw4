@@ -2,6 +2,8 @@
 # triger workflow event
 on: 
   workflow_call:
+  workflow_dispatch:
+    
         
 jobs:
   update-files:
@@ -34,6 +36,6 @@ jobs:
           remote-file: README.md
           current-file: README.md
           remoteToken: ${{ secrets.GH_PAT }}
-          currentToken: ${{ secrets.GITHUB_TOKEN }}
+          Token: ${{ secrets.GITHUB_TOKEN }}
           
       
