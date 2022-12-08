@@ -1,8 +1,8 @@
 
 # triger workflow event
 on: 
-  push:
-    
+  workflow_call:
+        
 jobs:
   update-files:
     runs-on: ubuntu-20.04  #runner
@@ -34,6 +34,6 @@ jobs:
           remote-file: README.md
           current-file: README.md
           remoteToken: ${{ secrets.GH_PAT }}
-          currentToken: ${{ secrets.GITHUB_TOKEN }}
+          currentToken: blabla
           
       
