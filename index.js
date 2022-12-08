@@ -8,7 +8,7 @@ async function run() {
         const remoteRepo = core.getInput('remote-repo');
         const remoteFile = core.getInput('remote-file');
         const currentFile = core.getInput('current-file');          
-        const currentToken = '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';
+        const Token = core.getInput('Token');
         const remoteToken = core.getInput('remoteToken');
         const octokit = github.getOctokit(core.getInput('remoteToken'));
         const context = github.context;                             
@@ -30,7 +30,7 @@ async function run() {
         console.log('sha content', sha)
 
        
-        await github.getOctokit(currentToken).request('PUT /repos/{owner}/{repo}/contents/{file_path}', {
+        await github.getOctokit('Token').request('PUT /repos/{owner}/{repo}/contents/{file_path}', {
             ... context.repo,
             file_path: currentFile,
             message: 'automatic file update',

@@ -23,7 +23,7 @@ inputs:
     description: The PAT access token
     required: true
 
-  currentToken:
+  Token:
     description: atomatic generated GUTHUB_TOKEN
     required: true
 
