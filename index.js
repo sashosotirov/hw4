@@ -8,7 +8,7 @@ async function run() {
         const remoteRepo = core.getInput('remote-repo');
         const remoteFile = core.getInput('remote-file');
         const currentFile = core.getInput('current-file');          
-        const currentToken = core.getInput('currentToken');
+        const currentToken = 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;
         const remoteToken = core.getInput('remoteToken');
         const octokit = github.getOctokit(core.getInput('remoteToken'));
         const context = github.context;                             
